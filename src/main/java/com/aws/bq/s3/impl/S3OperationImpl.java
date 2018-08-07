@@ -50,7 +50,7 @@ public class S3OperationImpl implements IS3Operation {
             log.info("[AppStartupRunner] =========> Get Temp zip file [" + tmp.getAbsolutePath() + "] ..........");
             Files.copy(in, tmp.toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("[AppStartupRunner] =========> Exception: ", e);
         }
         return tmp;
     }

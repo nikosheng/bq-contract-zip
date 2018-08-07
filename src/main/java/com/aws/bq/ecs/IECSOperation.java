@@ -6,5 +6,6 @@ package com.aws.bq.ecs;
  * @Date: 8/6/2018
  */
 public interface IECSOperation {
-    void stopTask(String taskArn);
+    void stopTask(String cluster, String taskArn);
+    void stopAllTask(String cluster, String tag);
 }

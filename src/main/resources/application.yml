@@ -34,3 +34,5 @@ amazon:
   ecs:
     cluster:
       name: default
+    task:
+      tag: bq
