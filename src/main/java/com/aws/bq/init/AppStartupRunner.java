@@ -87,7 +87,7 @@ public class AppStartupRunner implements CommandLineRunner {
         } catch (Exception e) {
             log.error("[AppStartupRunner] =========> Exception:", e);
         } finally {
-            ecsops.stopAllTask(ECS_CLUSTER_NAME, ECS_TASK_BQ_TAG);
+//            ecsops.stopAllTask(ECS_CLUSTER_NAME, ECS_TASK_BQ_TAG);
         }
     }
 }
