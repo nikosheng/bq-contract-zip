@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+#TODO: figure out why I need this here and in bootstrap.yml
+spring:
+  application:
+    name: testApp
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://lab.cxbwswfsjviz.rds.cn-northwest-1.amazonaws.com.cn:3306/labdb
+    username: admin
+    password: abcd1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+ribbon:
+  ServerListRefreshInterval: 1000
+
+endpoints:
+  health:
+    sensitive: false
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+
+amazon:
+  s3:
+    bucket: bq-zhy-contract-bucket
+    tmpPath: C:\Users\jiasfeng\tmp\
+    zipPrefix: zip/
+  ecs:
+    cluster:
+      name: default
