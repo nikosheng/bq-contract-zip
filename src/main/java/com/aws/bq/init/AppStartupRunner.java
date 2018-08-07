@@ -46,31 +46,36 @@ public class AppStartupRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        log.info("The app is running......");
+        log.info("[AppStartupRunner] =========> The app is running......");
 
         // 1. Search contracts with parameters in RDS
         List<Contract> contracts = contractService.findContracts();
+        log.info("[AppStartupRunner] =========> Contracts size is [" + contracts.size() + "] ..........");
 
         // 2. Retrieve the S3 objects url
         List<File> files = Lists.transform(contracts, new Function<Contract, File>() {
                     @Override
                     public File apply(@Nullable Contract contract) {
                         S3Object object = s3ops.getObject(contract.getS3Bucket(), contract.getS3Key());
+                        log.info("[AppStartupRunner] =========> Get S3 Object [" + object.getKey() + "] ..........");
                         S3ObjectFileVO vo = s3ops.getFileFromS3Object(object);
                         return s3ops.convertFromS3Object(object, vo.getFileName());
                     }
                 }
         );
 
+        log.info("[AppStartupRunner] =========> Ready to zip file ..........");
         String generatedZipFile = Utils.generateFile("zip");
+        log.info("[AppStartupRunner] =========> " + generatedZipFile);
         ZipFileResult result = Utils.zipFiles(files, generatedZipFile);
         String s3Key = ZIP_S3_PREFIX + generatedZipFile;
         if (result.isSuccess()) {
             PutObjectResult res = s3ops.putObject(BUCKET_NAME, s3Key, generatedZipFile);
+            log.info("[AppStartupRunner] =========> Put Object to S3");
         }
 
         URL url = amazonS3.getUrl(BUCKET_NAME, s3Key);
-        log.info("Path: " + url.toString());
+        log.info("[AppStartupRunner] =========> Path: " + url.toString());
     }
 }
 

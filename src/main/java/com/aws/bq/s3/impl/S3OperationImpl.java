@@ -7,6 +7,7 @@ import com.amazonaws.services.s3.model.PutObjectResult;
 import com.amazonaws.services.s3.model.S3Object;
 import com.aws.bq.model.vo.S3ObjectFileVO;
 import com.aws.bq.s3.IS3Operation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ import java.nio.file.StandardCopyOption;
  * @Date: 8/5/2018
  */
 @Service
+@Slf4j
 public class S3OperationImpl implements IS3Operation {
 
     @Autowired
@@ -45,6 +47,7 @@ public class S3OperationImpl implements IS3Operation {
         InputStream in = object.getObjectContent();
         try {
             tmp = new File(com.google.common.io.Files.createTempDir(), fileName);
+            log.info("[AppStartupRunner] =========> Get Temp zip file [" + tmp.getAbsolutePath() + "] ..........");
             Files.copy(in, tmp.toPath(), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
