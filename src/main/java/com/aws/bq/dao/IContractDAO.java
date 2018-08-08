@@ -2,6 +2,7 @@ package com.aws.bq.dao;
 
 
 import com.aws.bq.model.Contract;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -11,9 +12,8 @@ import java.util.List;
  * @Date: 8/5/2018
  */
 public interface IContractDAO {
-    int add(Contract contract);
-    int update(Contract contract);
+    int insert(Contract contract);
     int delete(String contractId);
-    Contract findContractById(String contractId);
-    List<Contract> findContracts();
+    List<Contract> findByContract(Contract contract);
+    List<Contract> findAll();
 }

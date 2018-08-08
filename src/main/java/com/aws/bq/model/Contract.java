@@ -1,8 +1,10 @@
 package com.aws.bq.model;
 
+import com.google.common.collect.Maps;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @Description:
@@ -26,5 +28,5 @@ public class Contract {
     private Date createTime;
     private Date updateTime;
     private String operator;
-    private Integer delete;
+    private Integer del;
 }

@@ -7,6 +7,7 @@ import com.aws.bq.service.IContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,13 +21,8 @@ public class ContractServiceImpl implements IContractService {
     private IContractDAO contractDAO;
 
     @Override
-    public int add(Contract contract) {
-        return contractDAO.add(contract);
-    }
-
-    @Override
-    public int update(Contract contract) {
-        return contractDAO.update(contract);
+    public int insert(Contract contract) {
+        return contractDAO.insert(contract);
     }
 
     @Override
@@ -35,12 +31,14 @@ public class ContractServiceImpl implements IContractService {
     }
 
     @Override
-    public Contract findContractById(String contractId) {
-        return contractDAO.findContractById(contractId);
+    public List<Contract> findByContract(Contract contract) {
+        List<Contract> contracts = contractDAO.findByContract(contract);
+        return contracts.size() > 0 ? contracts : new ArrayList<>();
     }
 
     @Override
-    public List<Contract> findContracts() {
-        return contractDAO.findContracts();
+    public List<Contract> findAll() {
+        List<Contract> contracts = contractDAO.findAll();
+        return contracts.size() > 0 ? contracts : new ArrayList<>();
     }
 }

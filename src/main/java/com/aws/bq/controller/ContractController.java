@@ -30,7 +30,7 @@ public class ContractController {
         Contract contract = new Contract();
         contract.setContractId(Utils.generateUUID());
         contract.setClientNum(contractVO.getContractNum());
-        int num = contractService.add(contract);
+        int num = contractService.insert(contract);
         log.info("Inserted " + num + " item(s)");
     }
 }
